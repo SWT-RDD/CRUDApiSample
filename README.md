@@ -29,17 +29,17 @@ Post https://www.sol-idea.com.tw/back/api/JsonUploadInputApi
 | --------------------- | --------------------------- |
 | ApiKey                | 你的 api key                |
 | FileName              | 要新增或刪除的檔案名稱            |
-| FolderSn              | 要新增或刪除的檔案所在的資料集編號，可以在網址列看到 ![image](https://github.com/user-attachments/assets/8a5d0c75-d913-44f4-a326-7ecf30c81659)|
+| FolderSn              | 要新增或刪除的檔案所在的資料集編號，可以在網址列看到，如圖: ![image](https://github.com/user-attachments/assets/8a5d0c75-d913-44f4-a326-7ecf30c81659)|
 | Action                | 選擇要新增還是刪除，新增填0，刪除填2     |
-| UploadedJsonDatas     | 要上傳的資料，一篇2000字的話，一次建議1000筆以內，不然會等很久     |
+| UploadedJsonDatas     | 要上傳的資料，如果是刪除填空陣列。一次建議1000筆資料以內，不然會要等很久     |
 
 #### Layer 3
 | KEY                   | VALUE                       |
 | --------------------- | --------------------------- |
-| FieldTitle            | 標題欄位                |
-| FieldTime             | 時間欄位，格式yyyy-MM-dd HH:mm:ss            |
-| FieldContent          | 內容欄位|
-| CusField              | 備註欄位，列表中需要填三個，如果想要空值可以填空字串     |
+| FieldTitle            | 標題欄位，如果想要空值可以填空字串             |
+| FieldTime             | 時間欄位，格式yyyy-MM-dd HH:mm:ss，如果想要空值可以填空字串            |
+| FieldContent          | 內容欄位，非常不建議空值|
+| CusField              | 備註欄位，列表中需要填三個字串，如果想要空值可以填空字串     |
 
 ### curl 請求範例
 ```
