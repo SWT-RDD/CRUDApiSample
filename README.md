@@ -75,7 +75,7 @@ curl https://www.sol-idea.com.tw/back/api/CompletionBot/SimplifiedFAQ --form jso
 | Code                 | Message                   |
 | -------------------- | ------------------------- |
 | 3001                 | Json字串解析失敗                |
-| 3002                 | 資料格式錯誤 (FieldTitle FieldTime FieldContent CusField都不能有空值)                |
+| 3002                 | 資料格式錯誤 (UploadedJsonDatas FieldTitle FieldTime FieldContent CusField都不能有空值)                |
 | 3005                 | 檔案過大(目前是10 MB)                 |
 | 4001                 | ApiKey錯誤或不存在               |
 | 4005                 | 帳號空間不足                 |
