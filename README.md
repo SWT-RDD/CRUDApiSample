@@ -59,8 +59,8 @@ curl https://www.sol-idea.com.tw/back/api/CompletionBot/SimplifiedFAQ --form jso
 #### Layer 2
 | KEY                  | VALUE                     |
 | -------------------- | ------------------------- |
-| FileName             | 進系統之後的檔案名稱，           |
-| FolderSn             | 進系統之後的資料集編號      |
+| FileName             | 進系統之後的檔案名稱，建議存起來以後要刪掉的時候可以用           |
+| FolderSn             | 進系統之後的資料集編號，建議存起來以後要刪掉的時候可以用      |
 
 ### 回應錯誤處理
 使用 Http 400 Bad Request
