@@ -52,7 +52,7 @@ curl https://www.sol-idea.com.tw/back/api/CompletionBot/SimplifiedFAQ --form jso
 | ---------- | -------------------------- |
 | JsonData   | json 字串化後的資料，範例     |
 |            | {                         |
-|            | "FileName": "檔案名稱",      |
+|            | "FileName": "20240806170155_檔案名稱.jsonstring",      |
 |            | "FolderSn": 1234|
 |            | }                         |
 
