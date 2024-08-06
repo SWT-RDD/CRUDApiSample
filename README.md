@@ -39,7 +39,7 @@ Post https://www.sol-idea.com.tw/back/api/JsonUploadInputApi
 | FieldTitle            | 標題欄位，如果想要空值可以填空字串             |
 | FieldTime             | 時間欄位，格式yyyy-MM-dd HH:mm:ss，如果想要空值可以填空字串            |
 | FieldContent          | 內容欄位，非常不建議空值|
-| CusField              | 備註欄位，列表中需要填三個字串，如果想要空值可以填空字串     |
+| CusField              | 備註欄位，列表中需要填三個字串，如果任一個備註想要空值可以填空字串，反正最後列表中要有三個字串     |
 
 ### curl 請求範例
 ```
