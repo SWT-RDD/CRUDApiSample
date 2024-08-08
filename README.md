@@ -29,7 +29,7 @@ Post https://www.sol-idea.com.tw/back/api/JsonUploadInputApi
 | --------------------- | --------------------------- |
 | ApiKey                | 你的 api key                |
 | FileName              | 要新增或刪除的檔案名稱            |
-| FolderSn              | 要新增或刪除的檔案所在的資料集編號，可以在網址列看到，如圖: ![image](https://github.com/user-attachments/assets/8a5d0c75-d913-44f4-a326-7ecf30c81659)|
+| FolderSn              | 要新增或刪除的檔案所在的原始資料集編號，可以在網址列看到，如圖: ![image](https://github.com/user-attachments/assets/8a5d0c75-d913-44f4-a326-7ecf30c81659)|
 | Action                | 選擇要新增還是刪除，新增填0，刪除填2     |
 | UploadedJsonDatas     | 要上傳的資料，如果是刪除填空陣列。一次建議1000筆資料以內，不然會要等很久     |
 
@@ -43,7 +43,7 @@ Post https://www.sol-idea.com.tw/back/api/JsonUploadInputApi
 
 ### curl 請求範例
 ```
-curl https://www.sol-idea.com.tw/back/api/CompletionBot/SimplifiedFAQ --form jsonChatRoomVM="{\"ApiKey\":\"your_key\", \"ResponseFormat\":0, \"LogChatLogHistorySN\":-1,\"ChatLogs\":[{\"HumanContent\": \"你好阿\", }]}"
+curl https://www.sol-idea.com.tw/back/api/JsonUploadInputApi --form uploadedJsonVM="{\"ApiKey\":\"your_key\", \"FileName\":\"檔案名稱\", \"FolderSn\":1234,\"Action\":0,\"UploadedJsonDatas\":[{\"FieldTitle\": \"標題1\",\"FieldTime\": \"2024-08-06 11:11:11\",\"FieldTitle\": \"我是內容1\",\"CusField\":[\"備註1\",\"備註2\",\"備註3\"], }]}"
 ```
 記得換掉your_key
 ### 回應資料範例
@@ -59,8 +59,8 @@ curl https://www.sol-idea.com.tw/back/api/CompletionBot/SimplifiedFAQ --form jso
 #### Layer 2
 | KEY                  | VALUE                     |
 | -------------------- | ------------------------- |
-| FileName             | 進系統之後的檔案名稱，建議存起來以後要刪掉的時候可以用           |
-| FolderSn             | 進系統之後的資料集編號，建議存起來以後要刪掉的時候可以用      |
+| FileName             | 資料進到系統之後的檔案名稱，建議存起來以後要刪掉的時候可以用           |
+| FolderSn             | 資料進到系統之後的原始資料集編號，建議存起來以後要刪掉的時候可以用      |
 
 ### 回應錯誤處理
 使用 Http 400 Bad Request
@@ -75,8 +75,8 @@ curl https://www.sol-idea.com.tw/back/api/CompletionBot/SimplifiedFAQ --form jso
 | Code                 | Message                   |
 | -------------------- | ------------------------- |
 | 3001                 | Json字串解析失敗                |
-| 3002                 | 資料格式錯誤 (UploadedJsonDatas FieldTitle FieldTime FieldContent CusField都不能有空值)                |
-| 3005                 | 檔案過大(目前是10 MB)                 |
-| 4001                 | ApiKey錯誤或不存在               |
+| 3002                 | 資料格式錯誤 (UploadedJsonDatas內容不能為空 FieldTitle FieldTime FieldContent CusField都不能有空值null)                |
+| 3005                 | 檔案過大 (目前是10 MB)                 |
+| 4001                 | ApiKey錯誤、不存在或過期               |
 | 4005                 | 帳號空間不足                 |
 | 4006                 | 原始資料集編號沒有權限或不存在                  |
