@@ -31,7 +31,13 @@ Post https://www.sol-idea.com.tw/back/api/JsonUploadInputApi
 | FileName              | 要新增或刪除的檔案名稱            |
 | FolderSn              | 要新增或刪除的檔案所在的原始資料集編號，可以在網址列看到，如圖: ![image](https://github.com/user-attachments/assets/a91520ec-7a28-4269-9433-2d7f55287d84)|
 | Action                | 選擇要新增還是刪除，新增填0，刪除填2     |
-| UploadedJsonDatas     | 要上傳的資料，如果是刪除填空陣列。一次建議1000筆資料以內，不然會要等很久     |
+| UploadedJsonDatas     | 要上傳的資料，如果是刪除填空陣列。一次建議1000筆資料以內，不然會要等很久，範例     |
+|                       |[{   |
+|                       |"FieldTitle": "標題1",          |
+|                       |"FieldTime": "2024-08-06 11:11:11",           |
+|                       |"FieldContent": "我是內容1",               |
+|                       |"CusField": ["備註1", "備註2", "備註3"]       |
+|                       |}] |
 
 #### Layer 3
 | KEY                   | VALUE                       |
