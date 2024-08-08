@@ -81,7 +81,7 @@ curl https://www.sol-idea.com.tw/back/api/JsonUploadInputApi --form jsonInputFil
 | Code                 | Message                   |
 | -------------------- | ------------------------- |
 | 3001                 | Json字串解析失敗                |
-| 3002                 | 資料格式錯誤 (UploadedJsonDatas內容不能為空 FieldTitle FieldTime FieldContent CusField都不能有空值null)                |
+| 3002                 | 資料格式錯誤 (UploadedJsonDatas內容不能為空 FieldTitle FieldTime FieldContent CusField都不能有null)                |
 | 3005                 | 檔案過大 (目前是10 MB)                 |
 | 4001                 | ApiKey錯誤、不存在或過期               |
 | 4005                 | 帳號空間不足                 |
