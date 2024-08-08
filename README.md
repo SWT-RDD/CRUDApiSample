@@ -15,7 +15,7 @@ Post https://www.sol-idea.com.tw/back/api/JsonUploadInputApi
 #### Layer 1
 | KEY            | VALUE                |
 | -------------- | -------------------- |
-| uploadedJsonVM | json 字串化後的字典，範例 |
+| jsonInputFile  | json 字串化後的字典，範例 |
 |                | {                   |
 |                | "ApiKey": "your_key",|
 |                | "FileName": "檔案名稱",|
@@ -43,7 +43,7 @@ Post https://www.sol-idea.com.tw/back/api/JsonUploadInputApi
 
 ### curl 請求範例
 ```
-curl https://www.sol-idea.com.tw/back/api/JsonUploadInputApi --form uploadedJsonVM="{\"ApiKey\":\"your_key\", \"FileName\":\"檔案名稱\", \"FolderSn\":1234,\"Action\":0,\"UploadedJsonDatas\":[{\"FieldTitle\": \"標題1\",\"FieldTime\": \"2024-08-06 11:11:11\",\"FieldTitle\": \"我是內容1\",\"CusField\":[\"備註1\",\"備註2\",\"備註3\"], }]}"
+curl https://www.sol-idea.com.tw/back/api/JsonUploadInputApi --form jsonInputFile="{\"ApiKey\":\"your_key\", \"FileName\":\"檔案名稱\", \"FolderSn\":1234,\"Action\":0,\"UploadedJsonDatas\":[{\"FieldTitle\": \"標題1\",\"FieldTime\": \"2024-08-06 11:11:11\",\"FieldTitle\": \"我是內容1\",\"CusField\":[\"備註1\",\"備註2\",\"備註3\"], }]}"
 ```
 記得換掉your_key
 ### 回應資料範例
