@@ -18,7 +18,7 @@ Post https://www.sol-idea.com.tw/back/api/JsonUploadInputApi
 | jsonInputFile  | json 字串化後的字典，範例 |
 |                | {                   |
 |                | "ApiKey": "your_key",|
-|                | "FileName": "檔案名稱",|
+|                | "FileName": "我的檔案",|
 |                | "FolderSn": 1234,|
 |                | "Action": 0,|
 |                | "UploadedJsonDatas": [{"FieldTitle": "標題1", "FieldTime": "2024-08-06 11:11:11", "FieldContent": "我是內容1", "CusField": ["備註1", "備註2", "備註3"]}]|
@@ -28,7 +28,7 @@ Post https://www.sol-idea.com.tw/back/api/JsonUploadInputApi
 | KEY                   | VALUE                       |
 | --------------------- | --------------------------- |
 | ApiKey                | 你的 api key                |
-| FileName              | 要新增或刪除的檔案名稱            |
+| FileName              | 要新增或刪除的檔案名稱，例如我的檔案。另外注意進到系統之後檔案名稱會變成時間+檔案名稱+副檔名，例如20240806170155_我的檔案.jsonstring       |
 | FolderSn              | 要新增或刪除的檔案所在的原始資料集編號，可以在網址列看到，如圖: ![image](https://github.com/user-attachments/assets/a91520ec-7a28-4269-9433-2d7f55287d84)|
 | Action                | 選擇要新增還是刪除，新增填0，刪除填2     |
 | UploadedJsonDatas     | 要上傳的資料，如果是刪除填空陣列。一次建議1000筆資料以內，不然會要等很久，範例     |
@@ -49,7 +49,7 @@ Post https://www.sol-idea.com.tw/back/api/JsonUploadInputApi
 
 ### curl 請求範例
 ```
-curl https://www.sol-idea.com.tw/back/api/JsonUploadInputApi --form jsonInputFile="{\"ApiKey\":\"your_key\", \"FileName\":\"檔案名稱\", \"FolderSn\":1234,\"Action\":0,\"UploadedJsonDatas\":[{\"FieldTitle\": \"標題1\",\"FieldTime\": \"2024-08-06 11:11:11\",\"FieldContent\": \"我是內容1\",\"CusField\":[\"備註1\",\"備註2\",\"備註3\"], }]}"
+curl https://www.sol-idea.com.tw/back/api/JsonUploadInputApi --form jsonInputFile="{\"ApiKey\":\"your_key\", \"FileName\":\"我的檔案\", \"FolderSn\":1234,\"Action\":0,\"UploadedJsonDatas\":[{\"FieldTitle\": \"標題1\",\"FieldTime\": \"2024-08-06 11:11:11\",\"FieldContent\": \"我是內容1\",\"CusField\":[\"備註1\",\"備註2\",\"備註3\"], }]}"
 ```
 記得換掉your_key
 ### 回應資料範例
@@ -58,7 +58,7 @@ curl https://www.sol-idea.com.tw/back/api/JsonUploadInputApi --form jsonInputFil
 | ---------- | -------------------------- |
 | JsonData   | json 字串化後的資料，範例     |
 |            | {                         |
-|            | "FileName": "20240806170155_檔案名稱.jsonstring",      |
+|            | "FileName": "20240806170155_我的檔案.jsonstring",      |
 |            | "FolderSn": 1234|
 |            | }                         |
 
