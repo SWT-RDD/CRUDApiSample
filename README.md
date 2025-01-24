@@ -4,7 +4,7 @@
 本 API 用於上傳與刪除資料。
 
 ### URL
-Post https://www.sol-idea.com.tw/back/api/JsonUploadInputApi
+Post https://gufofaq.gufolab.com/api/JsonUploadInputApi
 
 ### 請求格式
 | KEY            | VALUE                |
