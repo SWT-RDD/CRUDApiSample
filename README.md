@@ -49,7 +49,7 @@ Post https://gufofaq.gufolab.com/api/JsonUploadInputApi
 
 ### curl 請求範例
 ```
-curl https://www.sol-idea.com.tw/back/api/JsonUploadInputApi --form jsonInputFile="{\"ApiKey\":\"your_key\", \"FileName\":\"我的檔案\", \"FolderSn\":1234,\"Action\":0,\"UploadedJsonDatas\":[{\"FieldTitle\": \"標題1\",\"FieldTime\": \"2024-08-06 11:11:11\",\"FieldContent\": \"我是內容1\",\"CusField\":[\"備註1\",\"備註2\",\"備註3\"], }]}"
+curl https://gufofaq.gufolab.com/api/JsonUploadInputApi --form jsonInputFile="{\"ApiKey\":\"your_key\", \"FileName\":\"我的檔案\", \"FolderSn\":1234,\"Action\":0,\"UploadedJsonDatas\":[{\"FieldTitle\": \"標題1\",\"FieldTime\": \"2024-08-06 11:11:11\",\"FieldContent\": \"我是內容1\",\"CusField\":[\"備註1\",\"備註2\",\"備註3\"], }]}"
 ```
 記得換掉your_key
 ### 回應資料範例
