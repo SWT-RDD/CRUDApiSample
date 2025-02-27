@@ -52,7 +52,7 @@ await PostUploadedJsonVM(uploadedJsonVM);
 //HttpPost副程式
 async Task PostUploadedJsonVM(UploadedJsonVM uploadedJsonVM)
 {
-    var url = "https://www.sol-idea.com.tw/back/api/JsonUploadInputApi";
+    var url = "https://gufofaq.gufolab.com/api/JsonUploadInputApi";
     var jsonInputFile = JsonConvert.SerializeObject(uploadedJsonVM);
     MultipartFormDataContent form = new MultipartFormDataContent();
     form.Add(new StringContent(jsonInputFile), "jsonInputFile");
