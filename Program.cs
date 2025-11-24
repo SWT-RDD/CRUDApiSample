@@ -1,5 +1,14 @@
 ﻿using Newtonsoft.Json;
 
+//共用HttpClient
+var handler = new HttpClientHandler();
+handler.ServerCertificateCustomValidationCallback =
+    (httpRequestMessage, cert, cetChain, policyErrors) =>
+    {
+        return true;
+    };
+HttpClient client = new HttpClient(handler); //如果碰到SSL憑證問題，可能可以嘗試加上或拿掉handler
+
 //生成範例兩筆資料
 var data1 = new UploadedJsonData()
 {
@@ -82,7 +91,7 @@ ExtractCountryOrTimeVM extractVM3 = new ExtractCountryOrTimeVM()
 {
     Text = "2024年3月15日，美國總統在白宮發表演說",
     Mode = "3",
-    ApiKey = "your_key",
+    ApiKey = "js-f2299f088dae428eb490477113767ac9bbc030c7da3b4abb9134b1500cbb5202",
     TimeReference = null // TimeReference 是可選的
 };
 await PostExtractCountryOrTime(extractVM3);
@@ -99,28 +108,25 @@ async Task PostUploadedJsonVM(UploadedJsonVM uploadedJsonVM)
     MultipartFormDataContent form = new MultipartFormDataContent();
     form.Add(new StringContent(jsonInputFile), "jsonInputFile");
 
-    using (var client = new HttpClient())
+    var response = await client.PostAsync(url, form);
+    if (response.IsSuccessStatusCode)
     {
-        var response = await client.PostAsync(url, form);
-        if (response.IsSuccessStatusCode)
+        var responseContent = await response.Content.ReadAsStringAsync();
+        var jsonFormat = JsonConvert.DeserializeObject<JsonFormat>(responseContent);
+        var returnJsonData = JsonConvert.DeserializeObject<ReturnJsonData>(jsonFormat.JsonData);
+        Console.WriteLine(returnJsonData.FolderSn + " " + returnJsonData.FileName);
+    }
+    else
+    {
+        if (response.StatusCode == System.Net.HttpStatusCode.BadRequest)
         {
-            var responseContent = await response.Content.ReadAsStringAsync();
-            var jsonFormat = JsonConvert.DeserializeObject<JsonFormat>(responseContent);
-            var returnJsonData = JsonConvert.DeserializeObject<ReturnJsonData>(jsonFormat.JsonData);
-            Console.WriteLine(returnJsonData.FolderSn + " " + returnJsonData.FileName);
+            var errorContent = await response.Content.ReadAsStringAsync();
+            var error = JsonConvert.DeserializeObject<ECustomError>(errorContent);
+            Console.WriteLine($"Handled Error: {error.Message}, Code: {error.Code}");
         }
         else
         {
-            if (response.StatusCode == System.Net.HttpStatusCode.BadRequest)
-            {
-                var errorContent = await response.Content.ReadAsStringAsync();
-                var error = JsonConvert.DeserializeObject<ECustomError>(errorContent);
-                Console.WriteLine($"Handled Error: {error.Message}, Code: {error.Code}");
-            }
-            else
-            {
-                Console.WriteLine($"Failed to post chatRoomVM. Status code: {response.StatusCode}");
-            }
+            Console.WriteLine($"Failed to post chatRoomVM. Status code: {response.StatusCode}");
         }
     }
 }
@@ -130,43 +136,33 @@ async Task PostUploadedJsonVM(UploadedJsonVM uploadedJsonVM)
 //HttpPost副程式(文字萃取)
 async Task PostExtractCountryOrTime(ExtractCountryOrTimeVM extractVM)
 {
-    var url = "https://gufofaq.gufolab.com/api/JsonUploadInputApi/ExtractCountryOrTime";
+    var url = "https://localhost:7098/JsonUploadInputApi/ExtractCountryOrTime";
+    var extractCountryOrTimeVM = JsonConvert.SerializeObject(extractVM);
     MultipartFormDataContent form = new MultipartFormDataContent();
-    form.Add(new StringContent(extractVM.Text), "Text");
-    form.Add(new StringContent(extractVM.Mode), "Mode");
-    form.Add(new StringContent(extractVM.ApiKey), "ApiKey");
-    if (!string.IsNullOrEmpty(extractVM.TimeReference))
+    form.Add(new StringContent(extractCountryOrTimeVM), "extractCountryOrTimeVM");
+
+    var response = await client.PostAsync(url, form);
+    if (response.IsSuccessStatusCode)
     {
-        form.Add(new StringContent(extractVM.TimeReference), "TimeReference");
+        var responseContent = await response.Content.ReadAsStringAsync();
+        var jsonFormat = JsonConvert.DeserializeObject<JsonFormat>(responseContent);
+        var result = JsonConvert.DeserializeObject<ExtractCountryOrTimeResultVM>(jsonFormat.JsonData);
+
+        Console.WriteLine("=== 萃取結果 ===");
+        Console.WriteLine($"國家: {result.Country ?? "null"}");
+        Console.WriteLine($"時間: {result.Time ?? "null"}");
     }
-
-    using (var client = new HttpClient())
+    else
     {
-        var response = await client.PostAsync(url, form);
-        if (response.IsSuccessStatusCode)
+        if (response.StatusCode == System.Net.HttpStatusCode.BadRequest)
         {
-            var responseContent = await response.Content.ReadAsStringAsync();
-            var jsonFormat = JsonConvert.DeserializeObject<JsonFormat>(responseContent);
-            var result = JsonConvert.DeserializeObject<ExtractCountryOrTimeResultVM>(jsonFormat.JsonData);
-
-            Console.WriteLine("=== 萃取結果 ===");
-            Console.WriteLine($"錯誤: {jsonFormat.Error}");
-            Console.WriteLine($"訊息: {jsonFormat.Message}");
-            Console.WriteLine($"國家: {result.Country ?? "null"}");
-            Console.WriteLine($"時間: {result.Time ?? "null"}");
+            var errorContent = await response.Content.ReadAsStringAsync();
+            var error = JsonConvert.DeserializeObject<ECustomError>(errorContent);
+            Console.WriteLine($"Handled Error: {error.Message}, Code: {error.Code}");
         }
         else
         {
-            if (response.StatusCode == System.Net.HttpStatusCode.BadRequest)
-            {
-                var errorContent = await response.Content.ReadAsStringAsync();
-                var error = JsonConvert.DeserializeObject<ECustomError>(errorContent);
-                Console.WriteLine($"Handled Error: {error.Message}, Code: {error.Code}");
-            }
-            else
-            {
-                Console.WriteLine($"Failed to extract. Status code: {response.StatusCode}");
-            }
+            Console.WriteLine($"Failed to extract. Status code: {response.StatusCode}");
         }
     }
 }

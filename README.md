@@ -106,7 +106,19 @@ Post https://gufofaq.gufolab.com/api/JsonUploadInputApi/ExtractCountryOrTime
 | -------------- | -------------------- |
 | Content-Type   | multipart/form-data  |
 
-### 請求參數
+### 請求資料範例
+#### Layer 1
+| KEY                      | VALUE                |
+| ------------------------ | -------------------- |
+| extractCountryOrTimeVM   | json 字串化後的字典，範例 |
+|                          | {                   |
+|                          | "Text": "2024年3月15日，美國總統在白宮發表演說",|
+|                          | "Mode": "3",|
+|                          | "ApiKey": "your_key",|
+|                          | "TimeReference": "2024-03-15 10:00:00"|
+|                          | }                   |
+
+#### Layer 2
 | KEY            | 必填  | VALUE                |
 | -------------- | ---- | -------------------- |
 | Text           | 是   | 要分析的文字內容（2-5000 字元）|
@@ -124,10 +136,7 @@ Post https://gufofaq.gufolab.com/api/JsonUploadInputApi/ExtractCountryOrTime
 ### curl 請求範例
 ```bash
 curl https://gufofaq.gufolab.com/api/JsonUploadInputApi/ExtractCountryOrTime \
-  --form Text="2024年3月15日，美國總統在白宮發表演說" \
-  --form Mode="3" \
-  --form ApiKey="your_api_key" \
-  --form TimeReference="2024-03-15 10:00:00"
+  --form extractCountryOrTimeVM="{\"Text\":\"2024年3月15日，美國總統在白宮發表演說\",\"Mode\":\"3\",\"ApiKey\":\"your_api_key\",\"TimeReference\":\"2024-03-15 10:00:00\"}"
 ```
 記得換掉 your_api_key
 
