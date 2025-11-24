@@ -178,8 +178,6 @@ public enum UploadedJsonAction : int
 
 public class JsonFormat
 {
-    public bool Error { get; set; }
-    public string Message { get; set; }
     public string JsonData { get; set; }
 }
 
