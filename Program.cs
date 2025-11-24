@@ -91,7 +91,7 @@ ExtractCountryOrTimeVM extractVM3 = new ExtractCountryOrTimeVM()
 {
     Text = "2024年3月15日，美國總統在白宮發表演說",
     Mode = "3",
-    ApiKey = "js-f2299f088dae428eb490477113767ac9bbc030c7da3b4abb9134b1500cbb5202",
+    ApiKey = "your_key",
     TimeReference = null // TimeReference 是可選的
 };
 await PostExtractCountryOrTime(extractVM3);
@@ -136,7 +136,7 @@ async Task PostUploadedJsonVM(UploadedJsonVM uploadedJsonVM)
 //HttpPost副程式(文字萃取)
 async Task PostExtractCountryOrTime(ExtractCountryOrTimeVM extractVM)
 {
-    var url = "https://localhost:7098/JsonUploadInputApi/ExtractCountryOrTime";
+    var url = "https://gufofaq.gufolab.com/api/JsonUploadInputApi/ExtractCountryOrTime";
     var extractCountryOrTimeVM = JsonConvert.SerializeObject(extractVM);
     MultipartFormDataContent form = new MultipartFormDataContent();
     form.Add(new StringContent(extractCountryOrTimeVM), "extractCountryOrTimeVM");
